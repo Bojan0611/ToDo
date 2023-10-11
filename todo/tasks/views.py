@@ -47,3 +47,17 @@ def deleteTask(request, pk):
         'task': task.title
     }
     return render(request, 'tasks/delete_task.html', context)
+
+def deleteCompletedTasks(request):
+    
+    completed_tasks = Task.objects.filter(complete = True)
+    
+    if request.method == "POST":
+        completed_tasks.delete()
+        return redirect("/")
+        
+    context = {
+        'completed_tasks': completed_tasks,
+    }
+    
+    return render(request, 'tasks/delete_completed_tasks.html', context)

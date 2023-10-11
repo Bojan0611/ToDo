@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Completed Tasks</title>
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+</head>
+<body>
+    <div class="center-column">
+        {% if completed_tasks %}
+            <form method="POST" action="">
+                {% csrf_token %}
+                <h3>Are you sure all below tasks are completed?</h3>
+                <a class="btn btn-md btn-info" href="{% url 'list' %}">Cancel</a>
+                {% for task in completed_tasks %}
+                    <div class="item-row">
+                        <p>{{task.title}}</p>
+                    </div>
+                {% endfor %}
+                <input class="btn btn-md btn-danger" type="submit" value="Confirm">
+            </form>
+        {% else %}
+            <h3>There are no done tasks!</h3>
+            <a href="{% url 'list' %}">Back</a>
+        {% endif %}
+    </div>
+</body>
+</html>
+

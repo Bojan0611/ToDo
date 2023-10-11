@@ -12,6 +12,7 @@
             {% csrf_token %}
             {{form.title}}
             <input class="btn btn-info" type="submit" name="create task">
+			<a class="btn btn-info" style="width:100%;" href="{% url 'delete_completed_tasks'%}">Delete completed tasks</a>
         </form>
         {% for task in tasks %}
             <div class="item-row">
